@@ -1,0 +1,39 @@
+interface IDInterface {
+  id: ID!
+}
+
+type Video implements IDInterface{
+  id: ID!
+  title: String!
+  url: String!
+  author: User!
+}
+
+type User{
+  id: ID!
+  name: String!
+  dob: String
+}
+
+type Query{
+  user(id: String!): User
+  video(id: String!): Video
+  videos: [Video!]!
+  users: [User!]
+}
+
+input NewVideo {
+  title: String!
+  url: String!
+  userId: ID!
+}
+
+input NewUser {
+  name: String!
+  dob: String
+}
+
+type Mutation {
+  createVideo(input:NewVideo!): Video!
+  createUser(input:NewUser!): User!
+}

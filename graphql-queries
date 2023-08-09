@@ -1,0 +1,94 @@
+query findUser($userID: String! = "T7080234855333309503", $withDOB: Boolean!) {
+  user(id: $userID) {
+    id
+    name
+    dob @include(if: $withDOB)
+  }
+}
+
+query findUsers {
+  users {
+    id
+    dob,
+    name
+  }
+}
+
+query findVideos {
+  videos {
+    id
+    title
+    url
+    author {
+      id
+    }
+  }
+}
+
+query findVideo{
+  video(id: "T3258788566703202229") {
+    ... on Video {
+      id
+    }
+    url
+    title
+    author {
+      name
+    }
+  }
+}
+
+mutation createUser {
+  createUser(input: {name: "f=gam", dob: "12/11/1998"}) {
+    id
+    name
+  }
+}
+
+mutation createVideo {
+  createVideo(input: {url:"video url", title: "test", userId: "T3661136742225171996"}) {
+    id
+    url
+    title
+    author {
+      id
+      name
+      dob
+    }
+  }
+}
+
+query aliasTest {
+  user1: user(id: "T2837311062533090376") {
+    id
+    dob,
+    name
+  }
+  user2: user(id: "T7080234855333309503") {
+    id
+    dob,
+    name
+  }
+}
+
+fragment comparision on User {
+  name
+  id
+  dob
+}
+
+query compare {
+  leftCompare: user(id: "T2837311062533090376") {
+    ...comparision
+  }
+  rightCompare: user(id: "T7080234855333309503") {
+    ...comparision
+  }
+}
+
+
+//variables
+{
+  "userID":"T2837311062533090376",
+  "withDOB": true
+}
