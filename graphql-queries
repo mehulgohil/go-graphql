@@ -86,7 +86,6 @@ query compare {
   }
 }
 
-
 //variables
 {
   "userID":"T2837311062533090376",
